@@ -10,6 +10,9 @@ html {
   font-size: 62.5%;
   box-sizing: border-box;
 }
+.hide {
+  display:none;
+}
 
 body {
   font-family: 'Nunito', sans-serif;
