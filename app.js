@@ -5,10 +5,15 @@ const score1El = document.getElementById("score--1");
 const buttonNew = document.querySelector(".btn--new");
 const buttonRoll = document.querySelector(".btn--roll");
 const buttonHold = document.querySelector(".btn--hold");
+const current0El = document.getElementById("current--0");
+const current1El = document.getElementById("current--1");
+
 // Setting the text content of the score to 0;
 score0El.textContent = 0;
 score1El.textContent = 0;
-let currentScore = 0;//this nees to be outside of the function because evertime the button is clicked we dont want our current score reset it to 0.
+let currentScore = 0; //this nees to be outside of the function because evertime the button is clicked we dont want our current score reset it to 0.
+const scores = [0, 0];
+let activePlayer = 0;
 
 //Hiding the dice element
 //grab the the dice element and Create the hide class
@@ -20,8 +25,8 @@ diceEl.classList.add("hide");
 buttonRoll.addEventListener("click", function () {
   console.log("button clicked");
   //we need to start by generating a random dice roll
-    const dice = Math.trunc(Math.random() * 6) + 1;
-    console.log(dice);
+  const dice = Math.trunc(Math.random() * 6) + 1;
+  console.log(dice);
   //Math.random which creates the number between 0 and 1
   //Multiply that by 6, we will get a number between 0 and 6 but not 6 so add 1 to it
   //truncate all of this by doing Math.trunc () so we removed the decimal part.
@@ -29,15 +34,25 @@ buttonRoll.addEventListener("click", function () {
   //Remove the hidden class
   diceEl.classList.remove("hide");
   //Check if the rolled dice is 1 >>Switch to the next player
-   //Dice will be number between 1 and 6
-   //we have to display one of the images
-   //we can manipulate this source(src) attribute from our JS 
-    diceEl.src = `./assets/images/dice-${dice}.png`;
-    if (dice !== 1) {
-        //Add dice to the current score
-        const currentScore = document.querySelector("current-score");
-    } else {
-        // Switch player
-
-    }
+  //Dice will be number between 1 and 6
+  //we have to display one of the images
+  //we can manipulate this source(src) attribute from our JS
+  diceEl.src = `./assets/images/dice-${dice}.png`;
+  if (dice !== 1) {
+    //Add dice to the current score
+    currentScore += dice; //this will only set the text content to player 0 which we dont want instead
+    /* current0El.textContent = currentScore */ // We need to find out which one is actually the active player
+    //Create a variable tracks who is playing
+    //We need to keep track of which player is currently playing
+    //if the player is 0 instead select the score element dynamically based on which is the active player right now
+    //This is a very handy trick for building the id name dynamically
+    document.getElementById(`current--${activePlayer}`).textContent = currentScore;
+  } else {
+          document.getElementById(`current--${activePlayer}`).textContent =
+            0;
+    // Switch to the next player
+    //When we switch the player change the value to 0 to 1 or 1 to 1 using ternary operator.
+      activePlayer = activePlayer === 0 ? 1 : 0;//reassigning the value to active player switching value between 0 and 1.
+      currentScore = 0;
+  }
 });
