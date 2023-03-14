@@ -9,7 +9,7 @@ const current0El = document.getElementById("current--0");
 const current1El = document.getElementById("current--1");
 const player0El = document.querySelector('.player--0');
 const player1El = document.querySelector(".player--1");
-
+const scoreEl = document.querySelector('.score');
 // Setting the text content of the score to 0;
 score0El.textContent = 0;
 score1El.textContent = 0;
@@ -56,8 +56,18 @@ buttonRoll.addEventListener("click", function () {
     //When we switch the player change the value to 0 to 1 or 1 to 1 using ternary operator.
       activePlayer = activePlayer === 0 ? 1 : 0;//reassigning the value to active player switching value between 0 and 1.
       currentScore = 0;
+      //Add toggle method it will check if the class if its exists if its not it will add the class
       player0El.classList.toggle("player--active");
       player1El.classList.toggle("player--active");
 
   }
+});
+//Add an event handler to the hold button
+//Once user clicks on holds the score current score added to the active players score
+//Check if player
+buttonHold.addEventListener('click', function () {
+    console.log('button clicked');
+    currentScore = scoreEl.textContent;
+    console.log(currentScore);
+    console.log(scoreEl);
 });
