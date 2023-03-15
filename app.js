@@ -108,3 +108,5 @@ function switchPlayer() {
   player0El.classList.toggle("player--active");
   player1El.classList.toggle("player--active");
 }
+//Starting new game
+
